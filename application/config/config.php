@@ -17,6 +17,7 @@ $config['enable_hooks'] = FALSE;
 
 $config['subclass_prefix'] = 'MY_';
 
+// for vendor directories to autoload in all the controllers
 $config['composer_autoload'] = 'vendor/autoload.php';
 
 $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';

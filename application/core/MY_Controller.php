@@ -2,6 +2,8 @@
 
 class MY_Controller extends CI_Controller {
 
+    //. use like this. ->  $this->_ip() 
+
     public function __construct() {
         parent::__construct();
     }
@@ -52,20 +54,26 @@ class MY_Controller extends CI_Controller {
     }
 
     /* Cookies Functions Ends */
+    public function _send_email($smtp_host, $smtp_user, $pwd, $from, $name, $to, $subject, $page,$page_data) {
 
-    public function _send_email($from, $name, $to, $subject, $page,$page_data) {
-        $this->load->library('email');
-        $config['protocol'] = 'sendmail';
-        $config['mailtype'] = 'html';
-        $config['charset'] = 'utf-8';
-        $config['wordwrap'] = TRUE;
+        $config = Array(
+        'protocol' => 'smtp',
+        'smtp_host' =>  $smtp_host,
+        'smtp_port' =>  587,
+        'smtp_user' =>  $smtp_user,    // email id
+        'smtp_pass' =>  $pwd,      // password
+        'mailtype'  => 'html', 
+        'charset'   => 'iso-8859-1'
+        ); 
 
-$this->email->initialize($config);
+        $this->load->library('email', $config);   
+
         $this->email
                 ->from($from, $name)
                 ->to($to)
                 ->subject($subject)
                 ->message($this->load->view($page,$page_data,TRUE));
+
        if ($this->email->send()) {
             return true;
         } else {
