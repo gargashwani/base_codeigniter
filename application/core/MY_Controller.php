@@ -9,7 +9,19 @@ class MY_Controller extends CI_Controller {
     }
 
     public function _ip() {
-        return $this->input->ip_address();
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+        {
+          $ip=$_SERVER['HTTP_CLIENT_IP'];
+        }
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+        {
+          $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+          $ip=$_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 
     public function _post($param = false) {

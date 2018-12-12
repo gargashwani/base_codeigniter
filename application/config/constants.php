@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+define('CURRENT_TIMESTAMP', time());
+define('SMTP_HOST', '');
+define('SMTP_USER', '');
+define('SMTP_PASS', '');
+
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace
